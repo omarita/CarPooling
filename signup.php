@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'class.user.php';
+require_once 'config.php';
 
 $reg_user = new USER();
 
@@ -17,11 +18,9 @@ if(isset($_POST['btn-signup']))
 	$upass = trim($_POST['txtpass']);
 	$code = md5(uniqid(rand()));
 
-	$stmt = $reg_user->runQuery("SELECT * FROM users WHERE userEmail=:email_id");
-	$stmt->execute(array(":email_id"=>$email));
-	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	$count = $reg_user->getUserByEmail($email);
 
-	if($stmt->rowCount() > 0)
+	if($count > 0)
 	{
 		$msg = "
 		      <div class='alert alert-error'>
@@ -34,9 +33,8 @@ if(isset($_POST['btn-signup']))
 	{
 		if($reg_user->register($uname,$email,$upass,$code))
 		{
-			$id = $reg_user->lasdID();
+			$id = $reg_user->userID;
 			$key = base64_encode($id);
-			$id = $key;
 
 			$message = "
 						Hello $uname,
@@ -44,7 +42,7 @@ if(isset($_POST['btn-signup']))
 						Welcome to CarPooling!<br/>
 						To complete your registration  please , just click following link<br/>
 						<br /><br />
-						<a href='http://".$config['hostname']."/verify.php?id=$id&code=$code'>Click HERE to Activate :)</a>
+						<a href='http://".$config['hostname']."/verify.php?id=$key&code=$code'>Click HERE to Activate :)</a>
 						<br /><br />
 						Thanks,";
 

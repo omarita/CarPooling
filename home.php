@@ -8,9 +8,7 @@ if(!$user_home->is_logged_in())
 	$user_home->redirect('index.php');
 }
 
-$stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['userSession']));
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$user_home->getUserById($_SESSION['userSession']);
 
 ?>
 
@@ -43,7 +41,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         <ul class="nav pull-right">
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
-								<?php echo $row['userEmail']; ?> <i class="caret"></i>
+								<?php echo $user_home->userEmail; ?> <i class="caret"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>

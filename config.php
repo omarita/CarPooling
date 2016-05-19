@@ -1,5 +1,5 @@
 <?php
 
-$config['hostname'] = 'localhost:8000';
+$config['hostname'] = 'carpooling.app:8000';
 
 ?>

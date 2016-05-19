@@ -11,28 +11,25 @@ if(isset($_GET['id']) && isset($_GET['code']))
 {
 	$id = base64_decode($_GET['id']);
 	$code = $_GET['code'];
-	
+
 	$statusY = "Y";
 	$statusN = "N";
-	
-	$stmt = $user->runQuery("SELECT userID,userStatus FROM users WHERE userID=:uID AND tokenCode=:code LIMIT 1");
-	$stmt->execute(array(":uID"=>$id,":code"=>$code));
-	$row=$stmt->fetch(PDO::FETCH_ASSOC);
-	if($stmt->rowCount() > 0)
+
+	$count=$user->getUserById($id);
+
+	if($count > 0)
 	{
-		if($row['userStatus']==$statusN)
+		if($user->userStatus==$statusN && $user->tokenCode==$code)
 		{
-			$stmt = $user->runQuery("UPDATE users SET userStatus=:status WHERE userID=:uID");
-			$stmt->bindparam(":status",$statusY);
-			$stmt->bindparam(":uID",$id);
-			$stmt->execute();	
-			
+			$user->userStatus=$statusY;
+			$user->update();
+
 			$msg = "
 		           <div class='alert alert-success'>
 				   <button class='close' data-dismiss='alert'>&times;</button>
 					  <strong>WoW !</strong>  Your Account is Now Activated : <a href='index.php'>Login here</a>
 			       </div>
-			       ";	
+			       ";
 		}
 		else
 		{
@@ -52,7 +49,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			   <strong>sorry !</strong>  No Account Found : <a href='signup.php'>Signup here</a>
 			   </div>
 			   ";
-	}	
+	}
 }
 
 ?>

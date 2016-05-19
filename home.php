@@ -18,7 +18,8 @@ $user_home->getUserById($_SESSION['userSession']);
     <head>
         <title>CarPooling</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+				<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+				<link href="bootstrap/css/bootstrap-table.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -77,14 +78,25 @@ $user_home->getUserById($_SESSION['userSession']);
 
         <!--/.fluid-container-->
         <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+				<script src="bootstrap/js/bootstrap.min.js"></script>
+				<script src="bootstrap/js/bootstrap-table.min.js"></script>
         <script src="assets/scripts.js"></script>
-
 
 				<div class="container">
 					<div class="shadowbox">
 					  <h2>Passaggi offerti</h2>
 					  <p>Lista dei passaggi offerti</p>
+						<table data-toggle="table" data-url="json/transfers.php" >
+								<thead>
+										<tr>
+												<th data-field="fromLocation">Da</th>
+												<th data-field="toLocation">A</th>
+												<th data-field="availableSeats">Posti disponibili</th>
+												<th data-field="price">Costo</th>
+										</tr>
+								</thead>
+						</table>
+						<p/>
 					  <table class="table table-hover">
 					    <thead>
 					      <tr>

@@ -40,6 +40,20 @@ class Database
     return $stmt->rowCount();
   }
 
+  //input: query, parameters, json string (byref), return: number of rows
+  public function fetchJson($sql, $paramarray, &$json)
+  {
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($paramarray);
+    $emparray = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        $emparray[] = $row;
+    }
+    $json = json_encode($emparray);
+    return $stmt->rowCount();
+  }
+
   //return: string
 	public function lasdID()
 	{

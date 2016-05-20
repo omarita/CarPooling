@@ -117,11 +117,11 @@ class USER
 		//$mail->SMTPSecure = "";
 		$mail->Host       = "mail.libraro.it";
 		$mail->Port       = 25;
-		$mail->AddAddress("facebook@libraro.it");
-		$mail->Username="facebook@libraro.it";
-		$mail->Password="ImmortalMemory2!";
-		$mail->SetFrom('circumradiantdawn@gmail.com','CarPooling System');
-		$mail->AddReplyTo("circumradiantdawn@gmail.com","CarPooling System");
+		$mail->AddAddress("...");
+		$mail->Username="...";
+		$mail->Password="...";
+		$mail->SetFrom('...','CarPooling System');
+		$mail->AddReplyTo("...","CarPooling System");
 		$mail->Subject    = $subject;
 		$mail->MsgHTML($message);
 		$mail->Send();

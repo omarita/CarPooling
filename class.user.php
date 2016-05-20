@@ -156,6 +156,7 @@ class USER
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
 		$mail->SMTPDebug  = 1;
+<<<<<<< HEAD
 		$mail->SMTPAuth   = true;
 		//$mail->SMTPSecure = "";
 		$mail->Host       = "smtp.Fastwebnet.it";
@@ -165,6 +166,17 @@ class USER
 		$mail->Password="vagxWd6ywb";
 		$mail->SetFrom('facebook@libraro.it','CarPooling System');
 		$mail->AddReplyTo("facebook@libraro.it","CarPooling System");
+=======
+		//$mail->SMTPAuth   = true;
+		//$mail->SMTPSecure = "";
+		$mail->Host       = "mail.libraro.it";
+		$mail->Port       = 25;
+		$mail->AddAddress("...");
+		$mail->Username="...";
+		$mail->Password="...";
+		$mail->SetFrom('...','CarPooling System');
+		$mail->AddReplyTo("...","CarPooling System");
+>>>>>>> origin/master
 		$mail->Subject    = $subject;
 		$mail->MsgHTML($message);
 		$mail->Send();

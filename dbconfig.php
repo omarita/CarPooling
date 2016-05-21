@@ -1,8 +1,9 @@
 <?php
+
 class Database
 {
 
-  private $host = "localhost";
+  private $host;
   private $db_name = "carpoolingdb";
   private $username = "carpoolingusr";
   private $password = "carpoolingusr";
@@ -11,6 +12,12 @@ class Database
 
   private function __construct()
   {
+    require_once 'config.php';
+    $this->host = $config['dbhost'];
+    $this->db_name = $config['dbname'];
+    $this->username = $config['username'];
+    $this->password = $config['password'];
+
     $this->conn = null;
     try
     {

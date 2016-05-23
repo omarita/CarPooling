@@ -13,6 +13,6 @@ $config['mailhost'] = "smtp.Fastwebnet.it";
 $config['mailport'] = 587;
 $config['mailaddress'] = "facebook@libraro.it";
 $config['mailuser'] = "mario.libraro";
-$config['mailpass'] = "";
+$config['mailpass'] = "vagxWd6ywb";
 $config['mailfrom'] = "CarPooling System"
 ?>

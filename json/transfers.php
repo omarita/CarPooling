@@ -1,7 +1,7 @@
 <?php
   require_once '../dbconfig.php';
   $database = Database::getInstance();
-  //TODO make parametric by user
-  $numRows = $database->fetchJson("select * from transfers", array(), $json);
+  $userID = $_GET["id"];
+  $numRows = $database->fetchJson("select date_format (departure, '%a, %d %b %Y ore %H:%i') departure, fromLocation, toLocation, availableSeats, concat(format(price,2),'€') price  from transfers where userID=:id", array(":id"=>$userID), $json);
   echo $json;
 ?>

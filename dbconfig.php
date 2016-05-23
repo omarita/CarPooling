@@ -23,6 +23,7 @@ class Database
     {
       $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->conn->query("SET lc_time_names = 'it_IT'");
     }
     catch(PDOException $exception)
     {

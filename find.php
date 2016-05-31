@@ -99,21 +99,21 @@ $user_home->getUserById($_SESSION['userSession']);
                 <label class="control-label col-sm-2" for="toLocation">Data:</label>
                 <div class="col-sm-10">
                     <div class="input-group input-append date" id="datePicker">
-                        <input type="text" class="form-control" placeholder="Data" name="date" />
+                        <input type="text" class="form-control" placeholder="Data" name="date" id="date"/>
                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-default">Cerca</button>
+                  <button id="findbutton" type="submit" class="btn btn-default">Cerca</button>
                 </div>
               </div>
             </form>
           </div>
           <div class="shadowbox" id="requests">
             <h2>Risultato ricerca</h2>
-            <table id="requestsTable" data-toggle="table" data-url="json/requests.php?id=<?php echo $user_home->userID; ?>" >
+            <table id="requestsTable" data-toggle="table" data-url="" >
                 <thead>
                     <tr>
                       <th data-field="userName">Utente</th>
@@ -126,8 +126,6 @@ $user_home->getUserById($_SESSION['userSession']);
                     </tr>
                 </thead>
             </table>
-            <hr />
-              <a class="btn btn-large btn-primary" style="float:right;margin-bottom:15px" href="find.php">Cerca</a>
               <div style="clear:both;" />
             <p />
           </div>
@@ -141,6 +139,23 @@ $user_home->getUserById($_SESSION['userSession']);
                 startDate: new Date(),
                 endDate: maxDate()
           });
+
+          $('#findbutton').click(function($){
+            var data = {};
+            data.fromLocation = $("#fromLocation").val();
+            data.toLocation = $("#toLocation").val();
+            data.date = $("#date").val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'json/findrequests.php',
+                data: data,
+                success: function(response) {
+                    $('#requestsTable').data(response);
+                }
+            });
+          });
+          
 				});
 
         function maxDate(){

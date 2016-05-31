@@ -126,7 +126,7 @@
                 endDate: maxDate()
           });
 
-          $('#findbutton').click(function($){
+          $('#findbutton').click(function(){
             var data = {};
             data.fromLocation = $("#fromLocation").val();
             data.toLocation = $("#toLocation").val();
@@ -137,9 +137,11 @@
                 url: 'json/findrequests.php',
                 data: data,
                 success: function(response) {
-                    $('#requestsTable').data(response);
+                    //$('#requestsTable').data(response);
+
                 }
             });
+            return false;
           });
 
 				});

@@ -138,7 +138,6 @@
                 data: data,
                 success: function(response) {
                     //$('#requestsTable').data(response);
-
                 }
             });
             return false;

@@ -83,6 +83,7 @@ $user_home->getUserById($_SESSION['userSession']);
         <div class="shadowbox" id="find">
           <h2>Cerca un passaggio</h2>
             <form class="form-horizontal" role="form">
+              <input type="hidden" id="userID" value="<?php echo $user_home->userID; ?>">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="fromLocation">Partenza:</label>
                 <div class="col-sm-10">
@@ -113,7 +114,7 @@ $user_home->getUserById($_SESSION['userSession']);
           </div>
           <div class="shadowbox" id="requests">
             <h2>Risultato ricerca</h2>
-            <table id="requestsTable" data-toggle="table" data-url="" >
+            <table id="requestsTable" >
                 <thead>
                     <tr>
                       <th data-field="userName">Utente</th>
@@ -140,8 +141,9 @@ $user_home->getUserById($_SESSION['userSession']);
                 endDate: maxDate()
           });
 
-          $('#findbutton').click(function($){
+          $('#findbutton').click(function(){
             var data = {};
+            data.id = $("#userID").val();
             data.fromLocation = $("#fromLocation").val();
             data.toLocation = $("#toLocation").val();
             data.date = $("#date").val();
@@ -151,11 +153,14 @@ $user_home->getUserById($_SESSION['userSession']);
                 url: 'json/findrequests.php',
                 data: data,
                 success: function(response) {
-                    $('#requestsTable').data(response);
+                  //alert(response);
+                  $('#requestsTable').bootstrapTable({
+                    data: response
+                  });
                 }
             });
+            return false;
           });
-          
 				});
 
         function maxDate(){

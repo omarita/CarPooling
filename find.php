@@ -114,7 +114,7 @@ $user_home->getUserById($_SESSION['userSession']);
           </div>
           <div class="shadowbox" id="requests">
             <h2>Risultato ricerca</h2>
-            <table id="requestsTable" >
+            <table id="requestsTable" data-toggle="table"  >
                 <thead>
                     <tr>
                       <th data-field="userName">Utente</th>

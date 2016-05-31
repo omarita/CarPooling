@@ -115,17 +115,17 @@ $user_home->getUserById($_SESSION['userSession']);
           <div class="shadowbox" id="requests">
             <h2>Risultato ricerca</h2>
             <table id="requestsTable">
-                <thead>
-                    <tr>
-                      <th data-field="userName">Utente</th>
-                      <th data-field="phoneNo">Telefono</th>
-                      <th data-field="departure">Data e Ora</th>
-                      <th data-field="fromLocation">Partenza</th>
-                      <th data-field="toLocation">Destinazione</th>
-                      <th data-field="price">Prezzo</th>
-                      <th data-field="seats">Posti</th>
-                    </tr>
-                </thead>
+              <thead>
+                  <tr>
+                    <th data-field="userName">Utente</th>
+                    <th data-field="phoneNo">Telefono</th>
+                    <th data-field="departure">Data e Ora</th>
+                    <th data-field="fromLocation">Partenza</th>
+                    <th data-field="toLocation">Destinazione</th>
+                    <th data-field="price">Prezzo</th>
+                    <th data-field="seats">Posti</th>
+                  </tr>
+              </thead>
             </table>
               <div style="clear:both;" />
             <p />
@@ -152,33 +152,13 @@ $user_home->getUserById($_SESSION['userSession']);
                 type: 'GET',
                 url: 'json/findrequests.php',
                 data: data,
+                datatype: 'json',
                 success: function(response) {
                   //alert(response);
-                  $('#requestsTable').bootstrapTable({
-                    columns: [{
-                        field: 'userName',
-                        title: 'Utente'
-                    }, {
-                        field: 'phoneNo',
-                        title: 'Telefono'
-                    }, {
-                        field: 'departure',
-                        title: 'Data e Ora'
-                    }, {
-                        field: 'fromLocation',
-                        title: 'Partenza'
-                    }, {
-                        field: 'toLocation',
-                        title: 'Destinazione'
-                    }, {
-                        field: 'price',
-                        title: 'Prezzo'
-                    }, {
-                        field: 'seats',
-                        title: 'Posti'
-                    }],
-                    data: [{"userName":"omar_ita","phoneNo":null,"departure":"gio, 19 mag 2016 ore 21:16","message":"..","fromLocation":"Roma","toLocation":"Milano","price":"20","seats":"2"}]
-                  });
+                  $('#requestsTable').bootstrapTable({});
+                  //così va... se scrivo data=response no.. !! eppure è copia e incolla il valore di response (decommentare alert)
+                  var data = [{"userName":"omar_ita","phoneNo":null,"departure":"gio, 19 mag 2016 ore 21:16","message":"..","fromLocation":"Roma","toLocation":"Milano","price":"20","seats":"2"}];
+                  $('#requestsTable').bootstrapTable("load", data);
                 }
             });
             return false;

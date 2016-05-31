@@ -114,7 +114,7 @@ $user_home->getUserById($_SESSION['userSession']);
           </div>
           <div class="shadowbox" id="requests">
             <h2>Risultato ricerca</h2>
-            <table id="requestsTable" data-toggle="table"  >
+            <table id="requestsTable">
                 <thead>
                     <tr>
                       <th data-field="userName">Utente</th>
@@ -144,8 +144,8 @@ $user_home->getUserById($_SESSION['userSession']);
           $('#findbutton').click(function(){
             var data = {};
             data.id = $("#userID").val();
-            data.fromLocation = $("#fromLocation").val();
-            data.toLocation = $("#toLocation").val();
+            data.fromlocation = $("#fromLocation").val();
+            data.tolocation = $("#toLocation").val();
             data.date = $("#date").val();
 
             $.ajax({
@@ -155,7 +155,29 @@ $user_home->getUserById($_SESSION['userSession']);
                 success: function(response) {
                   //alert(response);
                   $('#requestsTable').bootstrapTable({
-                    data: response
+                    columns: [{
+                        field: 'userName',
+                        title: 'Utente'
+                    }, {
+                        field: 'phoneNo',
+                        title: 'Telefono'
+                    }, {
+                        field: 'departure',
+                        title: 'Data e Ora'
+                    }, {
+                        field: 'fromLocation',
+                        title: 'Partenza'
+                    }, {
+                        field: 'toLocation',
+                        title: 'Destinazione'
+                    }, {
+                        field: 'price',
+                        title: 'Prezzo'
+                    }, {
+                        field: 'seats',
+                        title: 'Posti'
+                    }],
+                    data: [{"userName":"omar_ita","phoneNo":null,"departure":"gio, 19 mag 2016 ore 21:16","message":"..","fromLocation":"Roma","toLocation":"Milano","price":"20","seats":"2"}]
                   });
                 }
             });

@@ -198,7 +198,7 @@ $user_home->getUserById($_SESSION['userSession']);
 						$('#datePicker')
 							.datepicker({
 									autoclose: true,
-									format: 'dd/mm/yyyy',
+									format: 'yyyy/mm/dd',
 									startDate: new Date(),
 									endDate: maxDate()
 						});

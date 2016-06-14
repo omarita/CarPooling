@@ -19,21 +19,22 @@ class USER
 
 	public function __construct()
 	{
+
 		$this->database = Database::getInstance();
 		$this->conn = $this->database->conn;
   }
 
 	private function fillData($row)
 	{
-		$this->userID = $row['userID'];
-		$this->userName = $row['userName'];
-		$this->userEmail = $row['userEmail'];
-		$this->userPass = $row['userPass'];
-		$this->phoneNo = $row['phoneNo'];
-		$this->paypalAccount = $row['paypalAccount'];
-		$this->userStatus = $row['userStatus'];
-		$this->tokenCode = $row['tokenCode'];
-		$this->accountLocked = $row['accountLocked'];
+		$this->userID = $row[0]['userID'];
+		$this->userName = $row[0]['userName'];
+		$this->userEmail = $row[0]['userEmail'];
+		$this->userPass = $row[0]['userPass'];
+		$this->phoneNo = $row[0]['phoneNo'];
+		$this->paypalAccount = $row[0]['paypalAccount'];
+		$this->userStatus = $row[0]['userStatus'];
+		$this->tokenCode = $row[0]['tokenCode'];
+		$this->accountLocked = $row[0]['accountLocked'];
 	}
 
 	public function update()
@@ -59,14 +60,16 @@ class USER
 	public function getUserById($userId)
 	{
 		$rowCount = $this->database->fetch("SELECT * FROM users WHERE userID=:uid", array(":uid"=>$userId), $rows);
-		$this->fillData($rows);
+		if ($rowCount > 0)
+			$this->fillData($rows);
 		return $rowCount;
 	}
 
 	public function getUserByEmail($email)
 	{
 		$rowCount = $this->database->fetch("SELECT * FROM users WHERE userEmail=:email_id",array(":email_id"=>$email), $rows);
-		$this->fillData($rows);
+		if ($rowCount > 0)
+				$this->fillData($rows);
 		return $rowCount;
 	}
 
@@ -83,7 +86,7 @@ class USER
 			$stmt->bindparam(":active_code",$code);
 			$stmt->execute();
 			//
-			$this->userID=$this->database->lasdID();
+			$this->userID=$this->database->lastID();
 			return $stmt;
 		}
 		catch(PDOException $ex)
@@ -152,6 +155,7 @@ class USER
 
 	function send_mail($email,$message,$subject)
 	{
+		include("config.php");
 		require_once('mailer/class.phpmailer.php');
 		$mail = new PHPMailer();
 		$mail->IsSMTP();

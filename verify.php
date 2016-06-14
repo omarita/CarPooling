@@ -46,7 +46,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 		$msg = "
 		       <div class='alert alert-error'>
 			   <button class='close' data-dismiss='alert'>&times;</button>
-			   <strong>sorry !</strong>  No Account Found : <a href='signup.php'>Signup here</a>
+			   <strong>sorry !</strong>  No Account Found [" . $id . " - " . $user->userName . "]: <a href='signup.php'>Signup here</a>
 			   </div>
 			   ";
 	}

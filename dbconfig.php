@@ -1,18 +1,19 @@
 <?php
-
 class Database
 {
 
   private $host;
-  private $db_name = "carpoolingdb";
-  private $username = "carpoolingusr";
-  private $password = "carpoolingusr";
+  private $db_name;
+  private $username;
+  private $password;
   public  $conn;
   private static $instance = null;
 
   private function __construct()
   {
-    require_once 'config.php';
+    include("config.php");
+
+    //require_once 'config.php';
     $this->host = $config['dbhost'];
     $this->db_name = $config['dbname'];
     $this->username = $config['username'];
@@ -44,8 +45,8 @@ class Database
   {
     $stmt = $this->conn->prepare($sql);
     $stmt->execute($paramarray);
-    $rows = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $stmt->rowCount();
+    $rows = $stmt->fetchAll();
+    return count($rows); //$stmt->rowCount();
   }
 
   //input: query, parameters, json string (byref), return: number of rows
@@ -63,7 +64,7 @@ class Database
   }
 
   //return: string
-	public function lasdID()
+	public function lastID()
 	{
 		$stmt = $this->conn->lastInsertId();
 		return $stmt;

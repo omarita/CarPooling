@@ -154,10 +154,8 @@ $user_home->getUserById($_SESSION['userSession']);
                 data: data,
                 datatype: 'json',
                 success: function(response) {
-                  //alert(response);
                   $('#requestsTable').bootstrapTable({});
-                  //così va... se scrivo data=response no.. !! eppure è copia e incolla il valore di response (decommentare alert)
-                  var data = [{"userName":"omar_ita","phoneNo":null,"departure":"gio, 19 mag 2016 ore 21:16","message":"..","fromLocation":"Roma","toLocation":"Milano","price":"20","seats":"2"}];
+                  var data = JSON.parse(response);
                   $('#requestsTable').bootstrapTable("load", data);
                 }
             });

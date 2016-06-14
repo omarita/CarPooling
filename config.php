@@ -1,4 +1,5 @@
 <?php
+global $config;
 //hostname config
 $config['hostname'] = "carpooling.app:8000";
 

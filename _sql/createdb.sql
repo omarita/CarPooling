@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `transfers` (
   `toLocation` varchar(100) NOT NULL,
   `availableSeats` numeric NOT NULL,
   `price` numeric NOT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (`transferID`)
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `requests` (
   `requestID` int(11) NOT NULL AUTO_INCREMENT,
   `transferID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `created` datetime NOT NULL,
+  `created` timestamp DEFAULT CURRENT_TIMESTAMP,
   `message` varchar(1000) NULL,
   `seats` numeric NOT NULL,
   `feedback` numeric NULL,

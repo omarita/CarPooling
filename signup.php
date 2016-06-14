@@ -25,7 +25,7 @@ if(isset($_POST['btn-signup']))
 		$msg = "
 		      <div class='alert alert-error'>
 				<button class='close' data-dismiss='alert'>&times;</button>
-					<strong>Sorry !</strong>  email allready exists , Please Try another one
+					<strong>Sorry !</strong>  email already exists [" . $count . " -  " . $reg_user->userName . "], Please Try another one
 			  </div>
 			  ";
 	}
